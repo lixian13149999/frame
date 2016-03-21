@@ -2,7 +2,7 @@
   "name": "frame",
   "version": "0.0.1",
   "description": "i nodejs frame",
-  "main": "app,js",
+  "main": "app.js",
   "dependencies": {
     "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",

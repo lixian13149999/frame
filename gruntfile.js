@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
 	//这里定义几个默认的任务
 	grunt.initConfig({
+		//监听的相关配置
 		watch: {
 			//设置用来监听的文件类型(文件法神改动时会触发相应的事件)
 			jade: {
