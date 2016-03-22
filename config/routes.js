@@ -1,5 +1,6 @@
 var Index = require('../app/controllers/index');
 var User = require('../app/controllers/user');
+var File = require('../app/controllers/file')
 
 // user controller
 module.exports = function(app) {
@@ -9,4 +10,8 @@ module.exports = function(app) {
 	//user route
 	app.post('/signup', User.signup);
 	app.get('/user/list', User.list);
+
+
+	//file upload
+	app.get('/toupload', File.toupload);
 }
