@@ -7,6 +7,7 @@
     "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "bower": "^1.7.7",
+    "connect-multiparty": "^2.0.0",
     "express": "^4.13.4",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
@@ -16,6 +17,7 @@
     "jade": "^1.11.0",
     "moment": "^2.12.0",
     "mongoose": "^4.4.8",
+    "morgan": "^1.7.0",
     "multiparty": "^4.1.2",
     "underscore": "^1.8.3"
   },

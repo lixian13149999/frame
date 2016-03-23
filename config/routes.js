@@ -1,6 +1,9 @@
 var Index = require('../app/controllers/index');
 var User = require('../app/controllers/user');
-var File = require('../app/controllers/file')
+var File = require('../app/controllers/file');
+
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 
 // user controller
 module.exports = function(app) {
@@ -14,4 +17,6 @@ module.exports = function(app) {
 
 	//file upload
 	app.get('/toupload', File.toupload);
+	app.post('/upload', File.upload);
+	app.post('/ajaxupload', multipartMiddleware, File.ajaxupload);
 }

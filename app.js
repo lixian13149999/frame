@@ -1,5 +1,10 @@
 // 引入express模块
 var express = require('express');
+
+//ajax上传文件用到的插件-------------------------
+var morgan = require('morgan');
+//ajax上传文件用到的插件-------------------------
+
 var path = require('path'); //引入路径管理
 
 // 这个中间件能把post传递的值初始化成一个json格式的对象
@@ -46,11 +51,15 @@ var walk = function(path) {
 //执行载入映射的位置
 walk(models);
 
+//ajax上传文件用到的插件-------------------------
+app.use(morgan('dev'));
+//ajax上传文件用到的插件-------------------------
 
 app.set('views', './app/views'); //设置视图目录
 app.set('view engine', 'jade'); //设置模板引擎
 //设置静态资源样式的目录
 app.use(express.static(path.join(__dirname, 'public')));
+// console.log(__dirname)
 //设置格式化post传入值的方法
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -65,3 +74,16 @@ require('./config/routes')(app);
 app.listen(port) //设置监听的端口3000
 
 console.log('Node started on port ' + port);
+
+// app.get('/env', function(req, res) {
+// 	console.log("process.env.VCAP_SERVICES: ", process.env.VCAP_SERVICES);
+// 	console.log("process.env.DATABASE_URL: ", process.env.DATABASE_URL);
+// 	console.log("process.env.VCAP_APPLICATION: ", process.env.VCAP_APPLICATION);
+// 	res.json({
+// 		code: 200,
+// 		msg: {
+// 			VCAP_SERVICES: process.env.VCAP_SERVICES,
+// 			DATABASE_URL: process.env.DATABASE_URL
+// 		}
+// 	});
+// });
