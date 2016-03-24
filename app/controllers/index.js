@@ -45,6 +45,7 @@ exports.signin = function(req, res) {
 			// console.log(isMatch);
 			//密码匹配
 			if (isMatch) {
+				req.session.user = user;
 				return res.json({
 					data: 1
 				});

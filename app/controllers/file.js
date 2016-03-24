@@ -27,10 +27,18 @@ exports.upload = function(req, res) {
 	form.on('file', function(name, file) {
 		oldPath = file.path;
 		//拼接想要上传到的路径
-		var rootDir = iutil.getRootDir();
-		var fileDir = '/public/uploads' + iutil.getFileDir(file.originalFilename);
-		// 对拼接的路径进行进一步的处理
+		var rootDir = iutil.getRootDir(); //获取项目根路径
+		//通过getFileDir方法获取文件存放的相对路径和文件名
+		var fileVal = iutil.getFileDir(file.originalFilename);
+		// 拼接文件存放的路径
+		var fileDir = '/public/uploads' + fileVal.fileDir;
+		//获取文件名
+		// var fileName = fileVal.fileName;
+		// 生成文件路径
 		var newPath = rootDir + fileDir;
+		//检测文件路径是否存在,如果不存在则生成一个
+		fs.existsSync(newPath) || fs.mkdirSync(newPath);
+		newPath += fileVal.fileName;
 		// newPath = dirName + iutil.getFileDir(file.originalFilename);
 
 		//重命名为真实文件名
@@ -74,9 +82,14 @@ exports.ajaxupload = function(req, res) {
 	var oldPath = req.files.inputFile.path;
 	//拼接想要上传到的路径
 	var rootDir = iutil.getRootDir();
-	var fileDir = '/public/uploads' + iutil.getFileDir(filename);
+	//通过getFileDir方法获取文件存放的相对路径和文件名
+	var fileVal = iutil.getFileDir(filename);
+	var fileDir = '/public/uploads' + fileVal.fileDir;
 	// 对拼接的路径进行进一步的处理
 	var newPath = rootDir + fileDir;
+	//检测文件路径是否存在,如果不存在则生成一个
+	fs.existsSync(newPath) || fs.mkdirSync(newPath);
+	newPath += fileVal.fileName;
 	// 执行移动文件的方法
 	fs.rename(oldPath, newPath, function(err) {
 		if (err) {

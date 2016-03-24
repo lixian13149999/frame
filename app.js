@@ -1,4 +1,5 @@
-// 引入express模块
+var cf = require('./config/config')
+	// 引入express模块
 var express = require('express');
 
 //ajax上传文件用到的插件-------------------------
@@ -18,10 +19,11 @@ var port = process.env.PORT || 3000;
 var mongoose = require('mongoose');
 // 引入mongodb连接器
 //定义链接路径
-var dbUrl = 'mongodb://localhost/frame';
+// var dbUrl = 'mongodb://localhost/frame';
+// var dbUrl = ;
 /*链接数据库*/
 // 调用connect方法,创建数据库(同时传入本地的连接地址和数据库名称)
-mongoose.connect(dbUrl);
+mongoose.connect(cf.DB_URL);
 
 //定义一个web服务器
 var app = express();
@@ -48,11 +50,17 @@ var walk = function(path) {
 		})
 }
 
+//引入log日志相关的配置文件
+//注:日志文件需要在所有配置文件的上方
+require('./config/log')(app);
+
 //执行载入映射的位置
 walk(models);
 
 //ajax上传文件用到的插件-------------------------
-app.use(morgan('dev'));
+//日志插件
+// app.use(morgan('dev'));
+// app.use(morgan());
 //ajax上传文件用到的插件-------------------------
 
 app.set('views', './app/views'); //设置视图目录
@@ -68,22 +76,13 @@ app.use(bodyParser.urlencoded({
 //格式化代码
 app.locals.pretty = true;
 
+//引入session的配置
+//注:session的配置文件需要在请求配置文件的上方
+require('./config/session')(app);
+
 //加入路径的配置文件
 require('./config/routes')(app);
 
 app.listen(port) //设置监听的端口3000
 
 console.log('Node started on port ' + port);
-
-// app.get('/env', function(req, res) {
-// 	console.log("process.env.VCAP_SERVICES: ", process.env.VCAP_SERVICES);
-// 	console.log("process.env.DATABASE_URL: ", process.env.DATABASE_URL);
-// 	console.log("process.env.VCAP_APPLICATION: ", process.env.VCAP_APPLICATION);
-// 	res.json({
-// 		code: 200,
-// 		msg: {
-// 			VCAP_SERVICES: process.env.VCAP_SERVICES,
-// 			DATABASE_URL: process.env.DATABASE_URL
-// 		}
-// 	});
-// });
