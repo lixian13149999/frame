@@ -2,6 +2,7 @@ var Index = require('../app/controllers/index');
 var User = require('../app/controllers/user');
 var File = require('../app/controllers/file');
 var PathExcel = require('../app/controllers/pathexcel');
+var Mail = require('../app/controllers/mail');
 
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
@@ -23,8 +24,13 @@ module.exports = function(app) {
 	app.post('/upload', File.upload);
 	app.post('/ajaxupload', multipartMiddleware, File.ajaxupload);
 
-
+	//excel file todo
 	app.get('/topath', PathExcel.topath);
 	app.post('/pathexcel', PathExcel.pathexcel);
 	app.post('/exportexcel', PathExcel.exportExcel);
+
+
+	//mail something todo
+	app.get('/tomail', Mail.toMail);
+	app.post('/sendmail', Mail.sendMail);
 }

@@ -21,6 +21,7 @@
     "morgan": "^1.7.0",
     "multiparty": "^4.1.2",
     "node-xlsx": "^0.6.0",
+    "nodemailer": "^0.7.1",
     "underscore": "^1.8.3"
   },
   "devDependencies": {},
