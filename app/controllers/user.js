@@ -15,7 +15,6 @@ exports.list = function(req, res) {
 			});
 		});
 }
-
 // signup  用户注册路由
 exports.signup = function(req, res) {
 	//通过body获取前台传入的user对象

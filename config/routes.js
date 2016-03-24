@@ -9,6 +9,8 @@ var multipartMiddleware = multipart();
 module.exports = function(app) {
 	// index route
 	app.get('/', Index.index);
+	app.get('/tosignin', Index.tosignin);
+	app.post('/signin', Index.signin);
 
 	//user route
 	app.post('/signup', User.signup);

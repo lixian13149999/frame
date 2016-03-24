@@ -1,6 +1,6 @@
 extends ../includes/layout.jade
 block content
-	//- form(method='post', action='/upload', enctype='multipart/form-data')
+	form(method='post', action='/upload', enctype='multipart/form-data')
 		input(name='inputFile', type='file', multiple='mutiple',id='ajaxUpload')
 		input(name='btnUp', type='submit',value='上传')
 
