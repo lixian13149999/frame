@@ -1,5 +1,5 @@
-var cf = require('./config/config')
-	// 引入express模块
+var cf = require('./config/config').config;
+// 引入express模块
 var express = require('express');
 
 //ajax上传文件用到的插件-------------------------
@@ -12,7 +12,8 @@ var path = require('path'); //引入路径管理
 var bodyParser = require("body-parser");
 
 // 设置端口(prosess是环境变量,用来获取全局变量,或者我们传入的参数)
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8899;
+// var port = 80 || process.env.PORT;
 
 /*定义数据库相关信息*/
 //引入mongoose模块
@@ -23,7 +24,8 @@ var mongoose = require('mongoose');
 // var dbUrl = ;
 /*链接数据库*/
 // 调用connect方法,创建数据库(同时传入本地的连接地址和数据库名称)
-mongoose.connect(cf.DB_URL);
+// console.log(cf);
+mongoose.connect(cf.dbUrl);
 
 //定义一个web服务器
 var app = express();
@@ -79,6 +81,9 @@ app.locals.pretty = true;
 //引入session的配置
 //注:session的配置文件需要在请求配置文件的上方
 require('./config/session')(app);
+
+//加入微信的配置
+require('./config/wechat')(app);
 
 //加入路径的配置文件
 require('./config/routes')(app);

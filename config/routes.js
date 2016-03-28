@@ -4,6 +4,7 @@ var File = require('../app/controllers/file');
 var PathExcel = require('../app/controllers/pathexcel');
 var Mail = require('../app/controllers/mail');
 var Markdown = require('../app/controllers/markdown');
+var Wechat = require('../app/controllers/wechat')
 
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart();
@@ -38,4 +39,11 @@ module.exports = function(app) {
 	//markdown something todo
 	app.get('/tomarkdown', Markdown.toMarkdown);
 	app.post('/markdown', Markdown.markdown);
+
+	//微信的相关认证
+	app.get('/wechat/attest', Wechat.attest);
+	app.get('/wechat/user', Wechat.user);
+	app.get('/wechat/tosend', Wechat.toSend);
+	app.post('/wechat/sendtext', Wechat.sendText);
+	app.post('/wechat/sendtemplate', Wechat.sendTemplate);
 }
